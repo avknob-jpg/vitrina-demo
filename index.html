@@ -1,0 +1,880 @@
+<!doctype html><html><head><meta charset=utf8>
+<meta name="robots" content="noindex, nofollow" data-publish><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Витрина</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#f6f4f0;
+  --surface:#ffffff;
+  --surface-2:#eeeae2;
+  --ink:#18151f;
+  --ink-soft:#5c5670;
+  --ink-faint:#8b859c;
+  --line:#e2ddd2;
+  --accent:#ff5a36;
+  --accent-ink:#fff8f4;
+  --accent-soft:#ffe7dc;
+  --good:#1f8a5f;
+  --good-soft:#e2f4ea;
+  --wb:#c2158a;
+  --wb-soft:#fce6f3;
+  --ozon:#0057ff;
+  --ozon-soft:#e3ecff;
+  --ym:#e6b800;
+  --ym-soft:#fdf4d1;
+  --shadow: 0 20px 40px -24px rgba(24,21,31,0.35);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131019;
+    --surface:#1b1725;
+    --surface-2:#221d2e;
+    --ink:#f3f0ea;
+    --ink-soft:#b3abc7;
+    --ink-faint:#8a839e;
+    --line:#332c42;
+    --accent:#ff6b48;
+    --accent-ink:#1b1725;
+    --accent-soft:#3a2420;
+    --good:#4fd399;
+    --good-soft:#173428;
+    --wb:#e356b3;
+    --wb-soft:#3a1c33;
+    --ozon:#5c8aff;
+    --ozon-soft:#1c2540;
+    --ym:#f0cc4a;
+    --ym-soft:#3a331a;
+    --shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131019;
+  --surface:#1b1725;
+  --surface-2:#221d2e;
+  --ink:#f3f0ea;
+  --ink-soft:#b3abc7;
+  --ink-faint:#8a839e;
+  --line:#332c42;
+  --accent:#ff6b48;
+  --accent-ink:#1b1725;
+  --accent-soft:#3a2420;
+  --good:#4fd399;
+  --good-soft:#173428;
+  --wb:#e356b3;
+  --wb-soft:#3a1c33;
+  --ozon:#5c8aff;
+  --ozon-soft:#1c2540;
+  --ym:#f0cc4a;
+  --ym-soft:#3a331a;
+  --shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box;}
+html,body{background:var(--paper);}
+body{
+  margin:0;
+  font-family:'Manrope',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  padding-left:max(18px, env(safe-area-inset-left,0px));
+  padding-right:max(18px, env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Unbounded',ui-sans-serif,system-ui,sans-serif; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+p{margin:0;}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+.wrap{max-width:1120px; margin:0 auto;}
+section{padding-block:76px;}
+@media (max-width:640px){ section{padding-block:52px;} }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600;
+  letter-spacing:0.09em; text-transform:uppercase; color:var(--accent);
+}
+.eyebrow::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--accent); display:inline-block;}
+.lede{font-size:17px; line-height:1.6; color:var(--ink-soft); max-width:640px;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+a{color:inherit;}
+::selection{background:var(--accent); color:var(--accent-ink);}
+
+/* ============ BUTTONS ============ */
+.btn{
+  appearance:none; border:none; cursor:pointer; font-family:'Manrope',sans-serif;
+  font-weight:700; font-size:15.5px; border-radius:999px; padding:15px 26px;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  text-decoration:none; white-space:nowrap;
+}
+.btn:active{transform:scale(0.97);}
+.btn-primary{background:var(--accent); color:var(--accent-ink); box-shadow:0 14px 28px -12px rgba(255,90,54,0.55);}
+.btn-primary:hover{box-shadow:0 18px 34px -12px rgba(255,90,54,0.7);}
+.btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line);}
+.btn-ghost:hover{border-color:var(--ink-faint);}
+.btn-dark{background:var(--ink); color:var(--paper);}
+.btn-block{width:100%;}
+.btn-sm{padding:9px 16px; font-size:13.5px; border-radius:999px;}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 0; background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.logo{display:flex; align-items:center; gap:9px; font-family:'Unbounded'; font-weight:700; font-size:18px;}
+.logo-mark{width:22px; height:22px; border-radius:6px; background:var(--accent); position:relative; flex:none;}
+.logo-mark::after{content:""; position:absolute; inset:5px 5px 9px 5px; border:1.6px solid var(--accent-ink); border-radius:2px; opacity:.9;}
+.topbar-links{display:flex; align-items:center; gap:22px;}
+.topbar-links a{font-size:14px; font-weight:600; color:var(--ink-soft); text-decoration:none;}
+.topbar-links a:hover{color:var(--ink);}
+@media (max-width:760px){ .topbar-links a.hide-mobile{display:none;} }
+
+/* ============ MARKETPLACE CHIP SELECTOR ============ */
+.mp-select{display:flex; flex-wrap:wrap; gap:10px;}
+.mp-chip{
+  display:flex; align-items:center; gap:8px; padding:10px 16px 10px 12px;
+  border-radius:999px; border:1.5px solid var(--line); background:var(--surface);
+  font-weight:700; font-size:13.5px; cursor:pointer; user-select:none;
+  transition:border-color .15s, background .15s;
+}
+.mp-dot{width:9px; height:9px; border-radius:50%; flex:none;}
+.mp-chip[data-mp="wb"] .mp-dot{background:var(--wb);}
+.mp-chip[data-mp="ozon"] .mp-dot{background:var(--ozon);}
+.mp-chip[data-mp="ym"] .mp-dot{background:var(--ym);}
+.mp-chip[data-mp="all"] .mp-dot{background:var(--accent);}
+.mp-chip.is-active{border-color:var(--ink); background:var(--surface-2);}
+
+/* ============ HERO ============ */
+.hero{padding-top:56px;}
+.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;}
+@media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+.hero h1{font-size:clamp(32px,4.6vw,54px); line-height:1.06; margin-top:18px;}
+.hero h1 em{font-style:normal; color:var(--accent);}
+.hero-lede{margin-top:18px;}
+.hero-ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
+.stat-row{display:flex; gap:28px; margin-top:40px; flex-wrap:wrap;}
+.stat b{display:block; font-family:'Unbounded'; font-size:26px;}
+.stat span{font-size:12.5px; color:var(--ink-faint); font-weight:600;}
+
+.compare{
+  border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--line);
+  box-shadow:var(--shadow); background:var(--surface);
+}
+.compare-head{display:grid; grid-template-columns:1fr 1fr;}
+.compare-tag{padding:10px 14px; font-family:'JetBrains Mono'; font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;}
+.compare-tag.before{background:var(--surface-2); color:var(--ink-faint);}
+.compare-tag.after{background:var(--accent); color:var(--accent-ink);}
+.compare-body{display:grid; grid-template-columns:1fr 1fr;}
+.mock-card{padding:18px; display:flex; flex-direction:column; gap:10px; min-height:280px;}
+.mock-card.before{background:var(--surface); border-right:1px solid var(--line);}
+.mock-card.after{background:var(--surface);}
+.mock-photo{border-radius:10px; flex:1; position:relative; overflow:hidden; background:var(--surface-2);}
+.mock-card.before .mock-photo{background:repeating-linear-gradient(45deg, var(--surface-2), var(--surface-2) 10px, var(--line) 10px, var(--line) 11px);}
+.mock-card.after .mock-photo{background:linear-gradient(155deg, var(--accent-soft), var(--surface-2) 70%);}
+.mock-badge{position:absolute; top:8px; left:8px; background:var(--accent); color:var(--accent-ink); font-family:'JetBrains Mono'; font-size:10px; font-weight:700; padding:4px 8px; border-radius:6px;}
+.mock-img,.case-visual img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
+.mock-card.before .mock-img,.case-visual .half.b img{filter:grayscale(.65) contrast(.78) brightness(.88) saturate(.8);}
+.mock-badge{z-index:1;}
+.case-visual .tag{z-index:1;}
+.mock-line{height:8px; border-radius:4px; background:var(--surface-2);}
+.mock-line.w60{width:60%;}
+.mock-line.w40{width:40%;}
+.mock-metric{display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:11px; color:var(--ink-faint); padding-top:4px; border-top:1px dashed var(--line);}
+.mock-metric b{color:var(--good); font-size:12px;}
+
+/* ============ PAIN GRID ============ */
+.pain-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px;}
+@media (max-width:900px){ .pain-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:600px){ .pain-grid{grid-template-columns:1fr;} }
+.pain-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; display:flex; flex-direction:column; gap:12px;}
+.pain-card:first-child{grid-column:span 1;}
+.pain-icon{width:38px; height:38px; border-radius:10px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:18px;}
+.pain-card p{font-size:14.5px; line-height:1.5; color:var(--ink-soft);}
+.pain-card b{font-size:15.5px; font-weight:700;}
+
+/* ============ OFFER ============ */
+.offer-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; margin-top:0;}
+@media (max-width:860px){ .offer-grid{grid-template-columns:1fr;} }
+.offer-list{display:flex; flex-direction:column; gap:12px;}
+.offer-item{display:flex; gap:14px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px;}
+.offer-item p{font-size:14.5px; font-weight:600; line-height:1.5;}
+
+/* ============ УТП ============ */
+.utp-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px;}
+@media (max-width:900px){ .utp-grid{grid-template-columns:1fr;} }
+.utp-card{background:var(--ink); color:var(--paper); border-radius:var(--radius-md); padding:24px;}
+.utp-card b{display:block; font-family:'Unbounded'; font-size:16.5px; margin-bottom:10px; line-height:1.3; font-weight:700;}
+.utp-card p{font-size:14px; color:#c9c3da; line-height:1.55;}
+
+/* ============ PACKAGES ============ */
+.pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; align-items:stretch;}
+@media (max-width:900px){ .pkg-grid{grid-template-columns:1fr;} }
+.pkg-card{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:26px; display:flex; flex-direction:column; gap:14px;}
+.pkg-card.is-featured{border-color:var(--accent); box-shadow:var(--shadow);}
+.pkg-badge{position:absolute; top:-13px; left:24px; background:var(--accent); color:var(--accent-ink); font-family:'JetBrains Mono'; font-size:11px; font-weight:700; padding:5px 12px; border-radius:999px;}
+.pkg-name{font-family:'Unbounded'; font-size:19px; font-weight:700;}
+.pkg-price{font-size:26px;}
+.pkg-per{font-size:13px; font-weight:500; color:var(--ink-faint); font-family:'Manrope';}
+.pkg-for{font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+.pkg-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; flex:1;}
+.pkg-list li{font-size:13.5px; padding-left:22px; position:relative; line-height:1.45;}
+.pkg-list li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--good); font-weight:700;}
+.tab-cta{margin-top:28px; display:flex; justify-content:center;}
+
+/* ============ CALCULATOR PACKAGE SEG ============ */
+.seg-full{width:100%;}
+.seg-full button{flex:1;}
+.calc-warn{font-size:12.5px; color:var(--accent); line-height:1.5; margin-top:8px; display:none;}
+.calc-warn.is-shown{display:block;}
+
+/* ============ PORTFOLIO ============ */
+.filter-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:30px;}
+.chip{border:1.5px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 15px; font-size:13px; font-weight:700; cursor:pointer;}
+.chip.is-active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px;}
+@media (max-width:900px){ .case-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:620px){ .case-grid{grid-template-columns:1fr;} }
+.case-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column;}
+.case-visual{display:grid; grid-template-columns:1fr 1fr; height:150px;}
+.case-visual .half{position:relative; overflow:hidden;}
+.case-visual .half.b{background:repeating-linear-gradient(45deg, var(--surface-2), var(--surface-2) 8px, var(--line) 8px, var(--line) 9px);}
+.case-visual .half.a{background:linear-gradient(155deg, var(--accent-soft), var(--surface-2) 75%);}
+.case-visual .tag{position:absolute; bottom:6px; left:6px; font-family:'JetBrains Mono'; font-size:9.5px; font-weight:700; padding:3px 6px; border-radius:5px; background:rgba(0,0,0,.55); color:#fff;}
+.case-body{padding:16px; display:flex; flex-direction:column; gap:10px; flex:1;}
+.case-cat{font-family:'JetBrains Mono'; font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
+.case-metric{font-size:14px; font-weight:700; color:var(--good);}
+.case-link{margin-top:auto; font-size:12.5px; font-weight:700; color:var(--accent); background:none; border:none; cursor:pointer; text-align:left; padding:0; font-family:'Manrope';}
+
+/* ============ CALCULATOR ============ */
+.calc-card{
+  margin-top:36px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow); display:grid; grid-template-columns:1.1fr 0.9fr;
+}
+@media (max-width:860px){ .calc-card{grid-template-columns:1fr;} }
+.calc-inputs{padding:32px; display:flex; flex-direction:column; gap:24px; border-right:1px solid var(--line);}
+@media (max-width:860px){ .calc-inputs{border-right:none; border-bottom:1px solid var(--line);} }
+.field label{display:block; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-bottom:10px;}
+.qty-row{display:flex; align-items:center; gap:16px;}
+.qty-row input[type=range]{flex:1; accent-color:var(--accent);}
+.qty-val{font-family:'JetBrains Mono'; font-weight:700; font-size:20px; min-width:38px; text-align:right;}
+.check-grid{display:flex; flex-direction:column; gap:10px;}
+.check-item{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius-sm); font-size:14px; font-weight:600; cursor:pointer;}
+.check-item input{accent-color:var(--accent); width:17px; height:17px;}
+.check-item .price{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--ink-faint); font-weight:500;}
+.check-item.is-disabled{opacity:.45; cursor:not-allowed;}
+.seg{display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; width:fit-content;}
+.seg button{border:none; background:transparent; padding:9px 18px; font-weight:700; font-size:13.5px; cursor:pointer; color:var(--ink-soft);}
+.seg button.is-active{background:var(--ink); color:var(--paper);}
+.calc-note{font-size:12.5px; color:var(--ink-faint); line-height:1.5;}
+
+.calc-output{padding:32px; display:flex; flex-direction:column; gap:20px; justify-content:center; background:var(--surface-2);}
+.price-range{font-family:'Unbounded'; font-size:clamp(24px,3vw,32px); line-height:1.15;}
+.price-range .sep{color:var(--ink-faint); font-weight:400; font-size:0.6em; margin:0 6px;}
+.discount-badge{display:inline-flex; align-items:center; gap:6px; background:var(--good-soft); color:var(--good); font-family:'JetBrains Mono'; font-size:12px; font-weight:700; padding:6px 12px; border-radius:999px; width:fit-content;}
+.calc-breakdown{display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--ink-soft); padding-top:12px; border-top:1px dashed var(--line);}
+.calc-breakdown div{display:flex; justify-content:space-between;}
+
+/* ============ PROCESS ============ */
+.process-list{display:flex; flex-direction:column; margin-top:36px;}
+.process-item{display:grid; grid-template-columns:64px 1fr auto; gap:20px; align-items:start; padding-block:22px; border-top:1px solid var(--line);}
+.process-item:last-child{border-bottom:1px solid var(--line);}
+.process-num{font-family:'Unbounded'; font-size:26px; color:var(--accent);}
+.process-item h4{font-size:16.5px;}
+.process-item p{font-size:14px; color:var(--ink-soft); margin-top:6px; max-width:520px;}
+.process-time{font-family:'JetBrains Mono'; font-size:12.5px; font-weight:700; background:var(--surface-2); padding:8px 12px; border-radius:999px; white-space:nowrap; height:fit-content;}
+@media (max-width:600px){ .process-item{grid-template-columns:40px 1fr; } .process-time{grid-column:2; } }
+
+/* ============ GUARANTEES ============ */
+.guarantee-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:34px;}
+@media (max-width:700px){ .guarantee-grid{grid-template-columns:1fr;} }
+.guarantee-card{display:flex; gap:14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px;}
+.guarantee-check{flex:none; width:30px; height:30px; border-radius:50%; background:var(--good-soft); color:var(--good); display:flex; align-items:center; justify-content:center; font-weight:800;}
+.guarantee-card p{font-size:14.5px; font-weight:600; line-height:1.45;}
+.fact-row{display:flex; gap:28px; flex-wrap:wrap; margin-top:36px; padding-top:30px; border-top:1px solid var(--line);}
+.fact{font-size:13.5px; color:var(--ink-soft); display:flex; align-items:center; gap:8px; font-weight:600;}
+.fact b{color:var(--ink); font-family:'JetBrains Mono';}
+
+/* ============ REVIEWS ============ */
+.review-scroll{display:flex; gap:16px; margin-top:32px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x mandatory;}
+.review-card{scroll-snap-align:start; flex:0 0 300px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px; display:flex; flex-direction:column; gap:12px;}
+.review-top{display:flex; align-items:center; gap:12px;}
+.avatar{width:42px; height:42px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-family:'Unbounded'; font-weight:700; font-size:15px; color:var(--accent); flex:none;}
+.review-name{font-weight:700; font-size:14.5px;}
+.review-niche{font-size:12px; color:var(--ink-faint);}
+.stars{color:var(--ym); font-size:13px; letter-spacing:1px;}
+.review-text{font-size:13.5px; line-height:1.55; color:var(--ink-soft);}
+.review-metric{font-family:'JetBrains Mono'; font-size:12px; font-weight:700; color:var(--good); background:var(--good-soft); padding:6px 10px; border-radius:8px; width:fit-content;}
+
+/* ============ FAQ ============ */
+.faq-list{margin-top:32px; display:flex; flex-direction:column; gap:10px;}
+details.faq-item{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md); padding:4px 20px; overflow:hidden;}
+details.faq-item summary{list-style:none; cursor:pointer; padding:18px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-weight:700; font-size:15px;}
+details.faq-item summary::-webkit-details-marker{display:none;}
+.faq-plus{flex:none; width:24px; height:24px; border-radius:50%; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px; transition:transform .2s;}
+details[open] .faq-plus{transform:rotate(45deg); border-color:var(--accent); color:var(--accent);}
+.faq-item p{font-size:14px; color:var(--ink-soft); line-height:1.6; padding-bottom:20px; margin:0;}
+
+/* ============ FINAL CTA ============ */
+.final{background:var(--ink); color:var(--paper); border-radius:var(--radius-lg); padding:52px; margin-top:0;}
+@media (max-width:640px){ .final{padding:30px 22px;} }
+.final-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;}
+@media (max-width:860px){ .final-grid{grid-template-columns:1fr;} }
+.final h2{color:var(--paper);}
+.final .lede{color:#c9c3da;}
+.final .mp-select .mp-chip{background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.14); color:var(--paper);}
+.final .mp-select .mp-chip.is-active{background:rgba(255,255,255,0.16); border-color:#fff;}
+.slots-note{margin-top:22px; display:flex; align-items:center; gap:9px; font-size:13px; color:var(--ym); font-weight:700;}
+.slots-note::before{content:"●"; font-size:9px;}
+
+.form-card{background:var(--surface); color:var(--ink); border-radius:var(--radius-md); padding:26px;}
+.form-row{display:flex; flex-direction:column; gap:14px;}
+.form-field label{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint); display:block; margin-bottom:7px;}
+.form-field input, .form-field select{
+  width:100%; padding:13px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--line);
+  background:var(--paper); color:var(--ink); font-size:15px; font-family:'Manrope'; outline:none;
+}
+.form-field input:focus, .form-field select:focus{border-color:var(--accent);}
+.contact-toggle{display:flex; gap:8px;}
+.contact-toggle button{flex:1; padding:11px; border-radius:var(--radius-sm); border:1.5px solid var(--line); background:var(--paper); font-weight:700; font-size:13.5px; cursor:pointer; color:var(--ink-soft);}
+.contact-toggle button.is-active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+.trust-line{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-faint); margin-top:14px; justify-content:center;}
+.msg-row{display:flex; gap:10px; margin-top:12px; justify-content:center;}
+.msg-btn{width:42px; height:42px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer;}
+.form-success{display:none; text-align:center; padding:30px 10px;}
+.form-success.is-shown{display:block;}
+.form-success .check{width:52px; height:52px; border-radius:50%; background:var(--good-soft); color:var(--good); display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 14px;}
+
+footer{padding-block:34px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+/* ============ STICKY MOBILE BAR ============ */
+.sticky-bar{
+  position:fixed; left:0; right:0; bottom:0; z-index:50; display:none;
+  padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter:blur(10px);
+  border-top:1px solid var(--line); gap:10px; align-items:center;
+  transform:translateY(110%); transition:transform .25s ease;
+}
+.sticky-bar.is-shown{transform:translateY(0);}
+@media (max-width:760px){ .sticky-bar{display:flex;} }
+.sticky-bar .btn{flex:1;}
+.sticky-msg{width:46px; height:46px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:19px; flex:none; border:1px solid var(--line);}
+
+.float-msg{
+  position:fixed; right:24px; bottom:28px; z-index:45; width:56px; height:56px; border-radius:50%;
+  background:var(--accent); color:var(--accent-ink); display:flex; align-items:center; justify-content:center;
+  font-size:24px; box-shadow:0 14px 26px -10px rgba(255,90,54,.6); border:none; cursor:pointer;
+}
+@media (max-width:760px){ .float-msg{display:none;} }
+
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important;} }
+</style>
+
+<div class="topbar">
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+    <div class="logo"><span class="logo-mark"></span>Витрина</div>
+    <div class="topbar-links">
+      <a href="#portfolio" class="hide-mobile">Портфолио</a>
+      <a href="#calculator" class="hide-mobile">Расчёт стоимости</a>
+      <a href="#faq" class="hide-mobile">Вопросы</a>
+      <a href="#cta" class="btn btn-primary btn-sm">Бесплатный аудит</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero wrap" id="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">Оформление карточек WB · Ozon · Я.Маркет</span>
+      <h1>Поднимем карточку в топ выдачи — <em>или вернём деньги</em> за первый месяц</h1>
+      <p class="lede hero-lede">Инфографика, SEO-описание, рич-контент и А+ под алгоритмы конкретной площадки. Работаем на рост CTR и конверсию в корзину, а не просто «красивую картинку».</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="scrollToId('cta')">Разобрать мою карточку бесплатно</button>
+        <button class="btn btn-ghost" onclick="scrollToId('portfolio')">Смотреть портфолио</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b class="mono">+37%</b><span>средний рост CTR</span></div>
+        <div class="stat"><b class="mono">1 240</b><span>карточек оформлено</span></div>
+        <div class="stat"><b class="mono">3 дня</b><span>средний срок сдачи</span></div>
+      </div>
+    </div>
+    <div class="compare">
+      <div class="compare-head">
+        <div class="compare-tag before">До</div>
+        <div class="compare-tag after">После «Витрины»</div>
+      </div>
+      <div class="compare-body">
+        <div class="mock-card before">
+          <div class="mock-photo"><img class="mock-img" src="assets/hero-before.webp" alt="Фото товара до оформления" width="900" height="900"></div>
+          <div class="mock-line w60"></div>
+          <div class="mock-line w40"></div>
+          <div class="mock-metric">CTR <span>1.8%</span></div>
+        </div>
+        <div class="mock-card after">
+          <div class="mock-photo"><img class="mock-img" src="assets/hero-after.webp" alt="Фото товара после оформления" width="900" height="900"><span class="mock-badge">−30% при заказе сегодня</span></div>
+          <div class="mock-line w60" style="background:var(--accent-soft);"></div>
+          <div class="mock-line w40" style="background:var(--accent-soft);"></div>
+          <div class="mock-metric">CTR <b>4.3%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFFER ================= -->
+<section class="wrap" id="offer">
+  <div class="offer-grid">
+    <div>
+      <span class="eyebrow">Для кого услуга</span>
+      <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Работаем с продавцами, которым нужны продажи, а не картинки</h2>
+      <p class="lede" style="margin-top:14px;">Ведёте магазин сами или отдали на аутсорс — неважно. Если карточка недорабатывает, это видно в цифрах: CTR, конверсия в корзину, процент выкупа. Поднимаем именно эти цифры, а не просто обновляем визуал.</p>
+    </div>
+    <div class="offer-list">
+      <div class="offer-item"><span class="guarantee-check">✓</span><p>Только вышли на WB, Ozon или Я.Маркет — карточка пустая или собрана на скорую руку</p></div>
+      <div class="offer-item"><span class="guarantee-check">✓</span><p>Товар продаётся хуже, чем должен при такой цене и качестве — конкуренты обгоняют по конверсии</p></div>
+      <div class="offer-item"><span class="guarantee-check">✓</span><p>Платите за рекламу, а бюджет «сливается» — переходы есть, покупок нет</p></div>
+      <div class="offer-item"><span class="guarantee-check">✓</span><p>Каталог от 15 карточек и нужен системный подход, а не разовая работа фрилансера</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAINS ================= -->
+<section class="wrap" id="pains">
+  <span class="eyebrow">Узнаёте своё?</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Причины, по которым карточка не продаёт — почти всегда одни и те же</h2>
+  <p class="lede" style="margin-top:12px;">Совпало хотя бы два пункта — на бесплатном аудите разберём, что из этого происходит именно в вашей карточке.</p>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="pain-icon">🔍</div><b>Карточку не видно в поиске</b><p>SEO-ключи не проработаны или засорены переспамом — площадка режет выдачу за некорректную семантику в заголовке и описании.</p></div>
+    <div class="pain-card"><div class="pain-icon">🛒</div><b>Заходят, но не покупают</b><p>Трафик есть, а конверсия в корзину ниже 3% — значит, инфографика не закрывает возражения на первом же слайде.</p></div>
+    <div class="pain-card"><div class="pain-icon">📉</div><b>Конкуренты продают больше</b><p>Товар хуже, а карточка сильнее: рич-контент, сравнительные таблицы и видео-обложка — там, где у вас голые фото с телефона.</p></div>
+    <div class="pain-card"><div class="pain-icon">🚫</div><b>Низкий контент-рейтинг</b><p>Карточка не проходит порог для участия в акциях и продвижении — площадка это довольно жёстко считает по заполненности контента.</p></div>
+    <div class="pain-card" style="grid-column:span 2;"><div class="pain-icon">🎨</div><b>«Уже делали у дизайнера-фрилансера»</b><p>Получилось красиво, но не по ТЗ площадки: инфографика обрезается на мобильном превью, слайды не читаются в ленте, а SEO вообще никто не считал. Мы сначала разбираем требования конкретного маркетплейса, потом рисуем.</p></div>
+  </div>
+</section>
+
+<!-- ================= УТП ================= -->
+<section class="wrap" id="utp">
+  <span class="eyebrow">Почему «Витрина», а не фрилансер с биржи</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Три вещи, которые обычно не закрывает разовый исполнитель</h2>
+  <div class="utp-grid">
+    <div class="utp-card"><b>Полный цикл, не один слайд</b><p>Обработка фото → дизайн инфографики → SEO-тексты → загрузка и адаптация под требования площадки. Не «нарисуем картинку», а карточка целиком, под ключ.</p></div>
+    <div class="utp-card"><b>Настройка под алгоритм площадки</b><p>WB, Ozon и Я.Маркет ранжируют по-разному. Делаем не универсальный шаблон, а версию под факторы ранжирования конкретного маркетплейса.</p></div>
+    <div class="utp-card"><b>Метрики через 2 недели, а не обещания</b><p>Присылаем CTR и конверсию после публикации. Нет роста — дорабатываем бесплатно, это прописано в гарантиях.</p></div>
+  </div>
+</section>
+
+<!-- ================= PACKAGES ================= -->
+<section class="wrap" id="services">
+  <span class="eyebrow">Пакеты</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Три варианта оформления — под масштаб каталога</h2>
+  <p class="lede" style="margin-top:12px;">Внутри каждого пакета — полный цикл: дизайн инфографики, SEO-тексты и загрузка с адаптацией под требования конкретной площадки.</p>
+
+  <div class="pkg-grid">
+    <div class="pkg-card">
+      <span class="pkg-name">Старт</span>
+      <div class="pkg-price mono">от 1 500 ₽<span class="pkg-per">/карточка</span></div>
+      <p class="pkg-for">Для новых карточек и небольших каталогов — рабочий базовый уровень без лишнего.</p>
+      <ul class="pkg-list">
+        <li>4–6 слайдов инфографики</li>
+        <li>Базовые SEO-тексты — заголовок и описание</li>
+        <li>Заполнение характеристик под фильтры площадки</li>
+        <li>1 итерация правок</li>
+      </ul>
+      <button class="btn btn-ghost btn-block" onclick="selectPkg('start')">Выбрать «Старт»</button>
+    </div>
+
+    <div class="pkg-card is-featured">
+      <span class="pkg-badge">Чаще всего берут</span>
+      <span class="pkg-name">Рост</span>
+      <div class="pkg-price mono">от 2 800 ₽<span class="pkg-per">/карточка</span></div>
+      <p class="pkg-for">Для карточек с трафиком, где конверсия не дотягивает — усиливаем аргументацию и охват.</p>
+      <ul class="pkg-list">
+        <li>7–10 слайдов инфографики</li>
+        <li>Видеообложка</li>
+        <li>Расширенные тексты и сбор ключевых слов</li>
+        <li>2 итерации правок</li>
+      </ul>
+      <button class="btn btn-primary btn-block" onclick="selectPkg('growth')">Выбрать «Рост»</button>
+    </div>
+
+    <div class="pkg-card">
+      <span class="pkg-name">Премиум</span>
+      <div class="pkg-price mono">от 4 200 ₽<span class="pkg-per">/карточка</span></div>
+      <p class="pkg-for">Для конкурентных ниш и каталогов от 15 карточек — максимум инструментов ранжирования.</p>
+      <ul class="pkg-list">
+        <li>Всё из пакета «Рост»</li>
+        <li>Рич-контент / А+ (нужен бренд-реестр площадки)</li>
+        <li>A/B-варианты обложки — 2–3 штуки</li>
+        <li>2 итерации правок и приоритетные сроки</li>
+      </ul>
+      <button class="btn btn-ghost btn-block" onclick="selectPkg('premium')">Выбрать «Премиум»</button>
+    </div>
+  </div>
+
+  <div class="tab-cta"><button class="btn btn-dark" onclick="scrollToId('calculator')">Посчитать точную вилку по моему каталогу</button></div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="wrap" id="portfolio">
+  <span class="eyebrow">Портфолио</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Примеры «было / стало» по вашей категории</h2>
+  <div class="filter-row" id="filterRow">
+    <button class="chip is-active" data-cat="all">Все</button>
+    <button class="chip" data-cat="clothes">Одежда</button>
+    <button class="chip" data-cat="electronics">Электроника</button>
+    <button class="chip" data-cat="home">Дом</button>
+    <button class="chip" data-cat="kids">Детские товары</button>
+    <button class="chip" data-cat="beauty">Косметика</button>
+  </div>
+  <div class="case-grid" id="caseGrid"></div>
+</section>
+
+<!-- ================= CALCULATOR ================= -->
+<section class="wrap" id="calculator">
+  <span class="eyebrow">Расчёт стоимости</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Сколько будет стоить оформление именно вашего каталога</h2>
+  <p class="lede" style="margin-top:12px;">Отметьте, что нужно — вилка цены пересчитается сразу. Точный расчёт с учётом ниши пришлём после короткой заявки.</p>
+
+  <div class="calc-card">
+    <div class="calc-inputs">
+      <div class="field">
+        <label>Маркетплейс</label>
+        <div class="mp-select" id="calcMp">
+          <div class="mp-chip is-active" data-mp="wb"><span class="mp-dot"></span>WB</div>
+          <div class="mp-chip" data-mp="ozon"><span class="mp-dot"></span>Ozon</div>
+          <div class="mp-chip" data-mp="ym"><span class="mp-dot"></span>Я.Маркет</div>
+          <div class="mp-chip" data-mp="all"><span class="mp-dot"></span>Несколько площадок</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Количество карточек</label>
+        <div class="qty-row">
+          <input type="range" id="qtyRange" min="1" max="60" value="8">
+          <span class="qty-val mono" id="qtyVal">8</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Пакет</label>
+        <div class="seg seg-full" id="pkgSeg">
+          <button class="is-active" data-pkg="start">Старт</button>
+          <button data-pkg="growth">Рост</button>
+          <button data-pkg="premium">Премиум</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Есть бренд-реестр на площадке?</label>
+        <div class="seg" id="brandSeg">
+          <button class="is-active" data-brand="no">Нет</button>
+          <button data-brand="yes">Да</button>
+        </div>
+        <p class="calc-note" style="margin-top:8px;">От этого зависит доступность рич-контента и А+ в пакете «Премиум» — без бренд-реестра площадка их технически не даёт подключить.</p>
+        <p class="calc-warn" id="calcWarn">Без бренд-реестра рич-контент из «Премиума» заменим на усиленную инфографику — уточним на аудите.</p>
+      </div>
+    </div>
+
+    <div class="calc-output">
+      <div>
+        <span class="eyebrow" style="margin-bottom:10px;">Итоговая вилка</span>
+        <div class="price-range mono" id="priceRange">70 000<span class="sep">—</span>94 000 ₽</div>
+      </div>
+      <div class="discount-badge" id="discountBadge" hidden></div>
+      <div class="calc-breakdown">
+        <div><span>Карточек</span><span class="mono" id="bkQty">8</span></div>
+        <div><span>Средняя цена за карточку</span><span class="mono" id="bkPerCard">2 500 ₽</span></div>
+        <div><span>Площадка</span><span id="bkMp">Wildberries</span></div>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitCalc()">Получить точный расчёт</button>
+      <p class="calc-note">При 5+ карточках — скидка 10%, от 15 — 20%, от 30 — 30%. Финальную цену фиксируем в договоре.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="wrap" id="process">
+  <span class="eyebrow">Как проходит работа</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">От заявки до карточки в топе — по дням</h2>
+  <div class="process-list">
+    <div class="process-item"><span class="process-num mono">01</span><div><h4>Бесплатный аудит текущей карточки</h4><p>Смотрим позиции, CTR, конверсию и соответствие требованиям площадки. Присылаем разбор, а не общие слова.</p></div><span class="process-time">1 день</span></div>
+    <div class="process-item"><span class="process-num mono">02</span><div><h4>Сбор SEO-семантики и ТЗ на дизайн</h4><p>Формируем список ключей и структуру слайдов инфографики под вашу нишу и площадку.</p></div><span class="process-time">1 день</span></div>
+    <div class="process-item"><span class="process-num mono">03</span><div><h4>Дизайн и 2 итерации правок</h4><p>Присылаем макет, вносим правки — до полного согласования в рамках двух бесплатных итераций.</p></div><span class="process-time">2–3 дня</span></div>
+    <div class="process-item"><span class="process-num mono">04</span><div><h4>Загрузка и проверка модерацией</h4><p>Публикуем на площадке и следим, чтобы карточка прошла модерацию без замечаний.</p></div><span class="process-time">1 день</span></div>
+    <div class="process-item"><span class="process-num mono">05</span><div><h4>Отслеживание метрик</h4><p>Смотрим CTR и конверсию первые две недели после публикации и донастраиваем при необходимости.</p></div><span class="process-time">14 дней</span></div>
+  </div>
+</section>
+
+<!-- ================= GUARANTEES ================= -->
+<section class="wrap" id="guarantees">
+  <span class="eyebrow">Гарантии</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Что мы фиксируем письменно — не на словах</h2>
+  <div class="guarantee-grid">
+    <div class="guarantee-card"><span class="guarantee-check">✓</span><p>2 бесплатные правки по дизайну — пока результат вас не устроит</p></div>
+    <div class="guarantee-card"><span class="guarantee-check">✓</span><p>Не прошли модерацию по нашей вине — переделываем бесплатно</p></div>
+    <div class="guarantee-card"><span class="guarantee-check">✓</span><p>Цена фиксируется в договоре — никаких доплат по ходу работы</p></div>
+    <div class="guarantee-card"><span class="guarantee-check">✓</span><p>Показываем метрики CTR через 2 недели — нет роста, дорабатываем бесплатно</p></div>
+  </div>
+  <div class="fact-row">
+    <span class="fact">Работаем с маркетплейсами с <b class="mono">2019</b> года</span>
+    <span class="fact">В штате — сертифицированный дизайнер маркетплейсов</span>
+    <span class="fact">Средний рейтинг <b class="mono">4.9</b> по отзывам клиентов</span>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section id="reviews">
+  <div class="wrap">
+    <span class="eyebrow">Отзывы</span>
+    <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">Что говорят продавцы после оформления</h2>
+  </div>
+  <div class="review-scroll wrap" id="reviewScroll"></div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="wrap" id="faq">
+  <span class="eyebrow">Вопросы</span>
+  <h2 style="font-size:clamp(24px,3vw,34px); margin-top:14px;">То, что обычно спрашивают перед заказом</h2>
+  <div class="faq-list">
+    <details class="faq-item"><summary>Нужен ли мне бренд-реестр для рич-контента?<span class="faq-plus">+</span></summary><p>Да, рич-контент и А+ технически доступны только при подтверждённом бренде на площадке. Без него делаем максимум через расширенную инфографику и SEO — это тоже ощутимо поднимает конверсию.</p></details>
+    <details class="faq-item"><summary>Вы гарантируете попадание в топ выдачи?<span class="faq-plus">+</span></summary><p>Честно — нет, позицию в поиске формируют ещё цена, остатки на складе и отзывы, это вне нашей зоны. Мы гарантируем рост CTR и конверсии за счёт контента — а это то, что реально управляем и фиксируем в метриках.</p></details>
+    <details class="faq-item"><summary>У меня уже есть карточка — вы её переделываете или создаёте с нуля?<span class="faq-plus">+</span></summary><p>Начинаем с бесплатного аудита текущей карточки: смотрим, что можно оставить, а что тормозит конверсию, и пересобираем именно проблемные блоки.</p></details>
+    <details class="faq-item"><summary>Работаете ли с зарубежными площадками, кроме WB, Ozon и Я.Маркет?<span class="faq-plus">+</span></summary><p>Основная специализация — российские маркетплейсы. По другим площадкам уточняйте на аудите, разберём отдельно.</p></details>
+    <details class="faq-item"><summary>Мне нужно 50+ карточек — есть скидка за объём?<span class="faq-plus">+</span></summary><p>Да, начиная с 15 карточек — скидка 20%, от 30 — 30%. Точную вилку под ваш каталог можно сразу прикинуть в калькуляторе выше.</p></details>
+    <details class="faq-item"><summary>Как быстро увижу результат в продажах?<span class="faq-plus">+</span></summary><p>Первые изменения по CTR обычно видны в течение 5–7 дней после публикации, устойчивый эффект на продажи — за 2–3 недели, вместе с накоплением отзывов на обновлённой карточке.</p></details>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="wrap" id="cta">
+  <div class="final">
+    <div class="final-grid">
+      <div>
+        <span class="eyebrow" style="color:var(--ym);">Бесплатный аудит карточки</span>
+        <h2 style="margin-top:14px; font-size:clamp(24px,3vw,32px);">Покажем, что именно тормозит продажи — до того, как вы заплатите хоть рубль</h2>
+        <p class="lede" style="margin-top:14px;">Заявка занимает минуту. Пришлём разбор карточки и вилку стоимости в течение 30 минут в рабочее время.</p>
+        <div class="mp-select" style="margin-top:22px;">
+          <div class="mp-chip is-active" data-mp="wb"><span class="mp-dot"></span>WB</div>
+          <div class="mp-chip" data-mp="ozon"><span class="mp-dot"></span>Ozon</div>
+          <div class="mp-chip" data-mp="ym"><span class="mp-dot"></span>Я.Маркет</div>
+        </div>
+        <div class="slots-note">Осталось 3 места на аудит на этой неделе</div>
+      </div>
+
+      <div class="form-card" id="formCard">
+        <form id="ctaForm" onsubmit="return submitForm(event)">
+          <div class="form-row">
+            <div class="form-field"><label for="fName">Имя</label><input id="fName" name="name" type="text" placeholder="Как к вам обращаться" required></div>
+            <div class="form-field">
+              <label>Способ связи</label>
+              <div class="contact-toggle" id="contactToggle">
+                <button type="button" class="is-active" data-c="phone">Телефон</button>
+                <button type="button" data-c="tg">Telegram</button>
+              </div>
+            </div>
+            <div class="form-field"><label for="fContact" id="fContactLabel">Телефон</label><input id="fContact" name="contact" type="text" placeholder="+7 900 000-00-00" required></div>
+            <div class="form-field"><label for="fLink">Ссылка на карточку / магазин <span style="text-transform:none; font-weight:500;">(необязательно)</span></label><input id="fLink" name="link" type="text" placeholder="Поможет сделать аудит точнее"></div>
+            <input type="hidden" id="fSummary" name="summary">
+            <button class="btn btn-primary btn-block" type="submit">Получить бесплатный аудит карточки</button>
+          </div>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="check">✓</div>
+          <b style="font-size:16px;">Заявка принята</b>
+          <p style="color:var(--ink-soft); font-size:13.5px; margin-top:8px;">Напишем в течение 30 минут в рабочее время.</p>
+        </div>
+        <p class="trust-line">⏱ Отвечаем в течение 30 минут в рабочее время</p>
+        <div class="msg-row">
+          <button class="msg-btn" title="Telegram" type="button">✈️</button>
+          <button class="msg-btn" title="WhatsApp" type="button">💬</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© Витрина — оформление карточек маркетплейсов</span>
+  <span>WB · Ozon · Я.Маркет</span>
+</footer>
+
+<button class="float-msg" title="Написать в Telegram">✈️</button>
+<div class="sticky-bar" id="stickyBar">
+  <div class="msg-btn sticky-msg">✈️</div>
+  <button class="btn btn-primary" onclick="scrollToId('cta')">Бесплатный аудит</button>
+</div>
+
+<script>
+function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+
+/* ---------- generic marketplace chip groups (visual only, independent per group) ---------- */
+document.querySelectorAll('.mp-select').forEach(function(group){
+  group.addEventListener('click', function(e){
+    var chip = e.target.closest('.mp-chip');
+    if(!chip) return;
+    group.querySelectorAll('.mp-chip').forEach(function(c){ c.classList.remove('is-active'); });
+    chip.classList.add('is-active');
+    if(group.id === 'calcMp'){ recalc(); }
+  });
+});
+
+/* ---------- portfolio data + render ---------- */
+var CASES = [
+  {img:'case-clothes', cat:'clothes', label:'Одежда', metric:'CTR 1.9% → 4.6%', mp:'WB'},
+  {img:'case-electronics', cat:'electronics', label:'Электроника', metric:'Конверсия в корзину +58%', mp:'Ozon'},
+  {img:'case-home', cat:'home', label:'Товары для дома', metric:'CTR 2.1% → 3.9%', mp:'WB'},
+  {cat:'kids', label:'Детские товары', metric:'Конверсия в корзину +71%', mp:'Я.Маркет'},
+  {img:'case-beauty', cat:'beauty', label:'Косметика', metric:'CTR 1.6% → 3.8%', mp:'Ozon'},
+  {img:'case-clothes', cat:'clothes', label:'Обувь', metric:'Конверсия в корзину +44%', mp:'WB'},
+  {img:'case-electronics', cat:'electronics', label:'Аксессуары для техники', metric:'CTR 2.4% → 5.1%', mp:'Ozon'},
+  {img:'case-home', cat:'home', label:'Текстиль', metric:'Конверсия в корзину +52%', mp:'Я.Маркет'},
+];
+var caseGrid = document.getElementById('caseGrid');
+CASES.forEach(function(c){
+  var el = document.createElement('div');
+  el.className='case-card'; el.dataset.cat=c.cat;
+  el.innerHTML =
+    '<div class="case-visual"><div class="half b">'+(c.img?'<img src="assets/'+c.img+'.webp" alt="" loading="lazy">':'')+'<span class="tag">До</span></div><div class="half a">'+(c.img?'<img src="assets/'+c.img+'.webp" alt="" loading="lazy">':'')+'<span class="tag">После</span></div></div>'+
+    '<div class="case-body"><span class="case-cat">'+c.label+' · '+c.mp+'</span><span class="case-metric">'+c.metric+'</span>'+
+    '<button class="case-link" onclick="scrollToId(\'cta\')">Такой же результат для моего товара →</button></div>';
+  caseGrid.appendChild(el);
+});
+document.getElementById('filterRow').addEventListener('click', function(e){
+  var chip = e.target.closest('.chip'); if(!chip) return;
+  document.querySelectorAll('#filterRow .chip').forEach(function(c){c.classList.remove('is-active');});
+  chip.classList.add('is-active');
+  var cat = chip.dataset.cat;
+  document.querySelectorAll('#caseGrid .case-card').forEach(function(card){
+    card.hidden = (cat!=='all' && card.dataset.cat!==cat);
+  });
+});
+
+/* ---------- reviews ---------- */
+var REVIEWS = [
+  {n:'Анна', niche:'Детская одежда, WB', text:'После пересборки инфографики карточка наконец стала попадать в рекомендованные. Заказы выросли уже на второй неделе.', metric:'CTR 1.7% → 4.1%'},
+  {n:'Марат', niche:'Электроника, Ozon', text:'Раньше делали инфографику сами — выглядело неплохо, но конверсия стояла на месте. Ребята пересобрали под алгоритм Ozon, разница ощутимая.', metric:'Конверсия +49%'},
+  {n:'Светлана', niche:'Косметика, WB', text:'Отдельное спасибо за SEO-описание — раньше карточка вообще не показывалась по ключевым запросам.', metric:'Позиции в топ-50 по 6 ключам'},
+  {n:'Игорь', niche:'Товары для дома, Я.Маркет', text:'Заполнили все характеристики, о важности которых я даже не думал — карточка начала попадать в фильтры, трафик заметно вырос.', metric:'Трафик +33%'},
+  {n:'Ольга', niche:'Детские товары, WB', text:'Взяли 12 карточек пакетом — сроки не сорвали, метрики прислали через две недели как обещали.', metric:'Конверсия +61%'},
+  {n:'Дмитрий', niche:'Аксессуары, Ozon', text:'Видео-обложка правда даёт буст — не ожидал, что это так заметно скажется на показах.', metric:'Показы +40%'},
+];
+var reviewScroll = document.getElementById('reviewScroll');
+REVIEWS.forEach(function(r){
+  var el = document.createElement('div');
+  el.className='review-card';
+  el.innerHTML =
+    '<div class="review-top"><div class="avatar">'+r.n[0]+'</div><div><div class="review-name">'+r.n+'</div><div class="review-niche">'+r.niche+'</div></div></div>'+
+    '<div class="stars">★★★★★</div><p class="review-text">'+r.text+'</p><span class="review-metric">'+r.metric+'</span>';
+  reviewScroll.appendChild(el);
+});
+
+/* ---------- calculator ---------- */
+var qtyRange = document.getElementById('qtyRange');
+var qtyVal = document.getElementById('qtyVal');
+var brandSeg = document.getElementById('brandSeg');
+var pkgSeg = document.getElementById('pkgSeg');
+var calcWarn = document.getElementById('calcWarn');
+var PKG_PRICES = {start:1500, growth:2800, premium:4200};
+var PKG_NAMES = {start:'Старт', growth:'Рост', premium:'Премиум'};
+var currentPkg = 'start';
+var hasBrand = false;
+
+qtyRange.addEventListener('input', function(){ qtyVal.textContent = qtyRange.value; recalc(); });
+
+pkgSeg.addEventListener('click', function(e){
+  var btn = e.target.closest('button'); if(!btn) return;
+  pkgSeg.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-active'); });
+  btn.classList.add('is-active');
+  currentPkg = btn.dataset.pkg;
+  recalc();
+});
+
+brandSeg.addEventListener('click', function(e){
+  var btn = e.target.closest('button'); if(!btn) return;
+  brandSeg.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-active'); });
+  btn.classList.add('is-active');
+  hasBrand = btn.dataset.brand === 'yes';
+  recalc();
+});
+
+function selectPkg(name){
+  pkgSeg.querySelectorAll('button').forEach(function(b){ b.classList.toggle('is-active', b.dataset.pkg===name); });
+  currentPkg = name;
+  recalc();
+  scrollToId('calculator');
+}
+
+function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
+
+function recalc(){
+  var qty = parseInt(qtyRange.value, 10);
+  var perCard = PKG_PRICES[currentPkg];
+
+  var discount = 1, discountLabel = '';
+  if(qty >= 30){ discount = 0.7; discountLabel = 'Скидка за объём: −30%'; }
+  else if(qty >= 15){ discount = 0.8; discountLabel = 'Скидка за объём: −20%'; }
+  else if(qty >= 5){ discount = 0.9; discountLabel = 'Скидка за объём: −10%'; }
+
+  var base = perCard * qty * discount;
+  var low = base * 0.85, high = base * 1.15;
+
+  document.getElementById('priceRange').innerHTML = fmt(low)+'<span class="sep">—</span>'+fmt(high)+' ₽';
+  var badge = document.getElementById('discountBadge');
+  if(discountLabel){ badge.hidden = false; badge.textContent = discountLabel; } else { badge.hidden = true; }
+
+  document.getElementById('bkQty').textContent = qty;
+  document.getElementById('bkPerCard').textContent = fmt(perCard * discount) + ' ₽';
+  var mpNames = {wb:'Wildberries', ozon:'Ozon', ym:'Я.Маркет', all:'Несколько площадок'};
+  var activeMp = document.querySelector('#calcMp .mp-chip.is-active').dataset.mp;
+  document.getElementById('bkMp').textContent = mpNames[activeMp];
+
+  calcWarn.classList.toggle('is-shown', currentPkg === 'premium' && !hasBrand);
+
+  window._calcSummary = 'Маркетплейс: '+mpNames[activeMp]+'; пакет: '+PKG_NAMES[currentPkg]+'; карточек: '+qty+'; вилка: '+fmt(low)+'–'+fmt(high)+' ₽';
+}
+recalc();
+
+function submitCalc(){
+  document.getElementById('fSummary').value = window._calcSummary || '';
+  scrollToId('cta');
+}
+
+/* ---------- final form ---------- */
+var contactToggle = document.getElementById('contactToggle');
+var fContact = document.getElementById('fContact');
+var fContactLabel = document.getElementById('fContactLabel');
+contactToggle.addEventListener('click', function(e){
+  var btn = e.target.closest('button'); if(!btn) return;
+  contactToggle.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-active'); });
+  btn.classList.add('is-active');
+  if(btn.dataset.c === 'tg'){ fContact.placeholder='@username'; fContactLabel.textContent='Telegram'; }
+  else { fContact.placeholder='+7 900 000-00-00'; fContactLabel.textContent='Телефон'; }
+});
+
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('ctaForm').hidden = true;
+  document.getElementById('formSuccess').classList.add('is-shown');
+  return false;
+}
+
+/* ---------- sticky mobile bar ---------- */
+var stickyBar = document.getElementById('stickyBar');
+var ctaSection = document.getElementById('cta');
+window.addEventListener('scroll', function(){
+  var past = window.scrollY > 480;
+  var ctaRect = ctaSection.getBoundingClientRect();
+  var inCta = ctaRect.top < window.innerHeight * 0.6;
+  stickyBar.classList.toggle('is-shown', past && !inCta);
+}, {passive:true});
+</script>
+
+</body></html>
